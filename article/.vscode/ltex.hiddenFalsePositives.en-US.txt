@@ -1,0 +1,7 @@
+{"rule":"ENGLISH_WORD_REPEAT_BEGINNING_RULE","sentence":"^\\QIn contrast to the previous studies, our analysis consider more generalized conditions.\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\QThe linearly polarized field consists a \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q-polarized electric field.\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\QWe model the linearly polarized dressing field with a \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q-polarized electric field\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\QWe model the linearly polarized dressing field with a \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q-polarized electric field \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, where \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is the amplitude of the electric field, \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is the frequency of the linear-polarized dressing field, and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is the unit vector that is pointed to the subscript direction \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\QMoreover, we model the linearly polarized radiation with a \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q-polarized electric field.\\E$"}
+{"rule":"MUCH_NEEDED_HYPHEN","sentence":"^\\QOur derivations and results provide the much needed theoretical background for understand and design advanced Schottky junction based waveguides.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QThey will guide the development and optimization of wide spectrum of SPP waveguiding-based nanoplsamonic devices.\\E$"}
