@@ -127,7 +127,7 @@ Following the standard procedures and tracing out the effects of the bath reserv
 	\end{aligned}
 \end{equation}
 where $\gamma_1$ and $\gamma_2$ are the modes damping constants, and $n^{\text{th}}_1$ and $n^{\text{th}}_2$ are the thermal photon numbers of the baths. This master equation may be solved by various techniques \cite{louisell1973}. However, in this analysis we convert it to an associated $\mathcal{C}$-number equation. We map the master equation to $\mathcal{C}$-number Fokker-Planck
-equation in the generalized P representation \cite{walls2008} making the mapping: $(\hat{a}_1,\hat{a}_1^{\dagger},\hat{a}_2,\hat{a}_2^{\dagger}) \leftrightarrow ({\alpha}_1,{\alpha}_1^{+},{\alpha}_2,{\alpha}_2^{+})$. Then, we can identify that 
+equation in the generalized P-representation \cite{walls2008} making the mapping: $(\hat{a}_1,\hat{a}_1^{\dagger},\hat{a}_2,\hat{a}_2^{\dagger}) \leftrightarrow ({\alpha}_1,{\alpha}_1^{+},{\alpha}_2,{\alpha}_2^{+})$. Then, we can identify that 
 \begin{equation}
 	\begin{aligned}
 		\pdv{P(\boldsymbol{\alpha})}{t} =
@@ -150,49 +150,175 @@ equation in the generalized P representation \cite{walls2008} making the mapping
 		\Bigg\}P(\boldsymbol{\alpha}),
 	\end{aligned}
 \end{equation}
-where $\boldsymbol{\alpha} = [{\alpha}_1,{\alpha}_1^{+},{\alpha}_2,{\alpha}_2^{+}]^{\intercal}$, $\Delta_1 = \omega_1 - \omega_p$ and $\Delta_2 = \omega_2 - 2\omega_p$. Furthermore, it is important to mention that the following transformation to the rotating frames of the driving fields has been mode in the previous derivation:
+where $\boldsymbol{\alpha} = [{\alpha}_1,{\alpha}_1^{+},{\alpha}_2,{\alpha}_2^{+}]^{\intercal}$, $\Delta_1 = \omega_1 - \omega_p$ and $\Delta_2 = \omega_2 - 2\omega_p$. It is crucial to emphasize that in this generalized P-representation, $\alpha_{d}$ and $\alpha^+_{d}$ are not each other's complex conjugates where $d \in \{1,2\}$. Furthermore, it is important to mention that the following transformation to the rotating frames of the driving fields has been mode in the previous derivation:
 \begin{equation}
 	\alpha_1 \rightarrow \alpha_1\exp(-i\omega t), \quad \text{and} \quad
 	\alpha_2 \rightarrow \alpha_2\exp(-2i\omega t).
 \end{equation}
 This enables us to establish equivalent stochastic differential equations employing the It$\hat{o}$ rules
-\begin{equation}
-	\pdv{t}\mqty(\alpha_1 \\ \alpha_1^+)
+\begin{equation}\label{eq_lan_1}
+	\pdv{t}\mqty(\alpha_1 \\ \alpha_1^+) =
+	\mqty(\epsilon_1 + \kappa\alpha_1^+\alpha_2 - (\gamma_1 + i\Delta_1)\alpha_1 \\
+	\epsilon_1^* + \kappa\alpha_1\alpha_2^+ - (\gamma_1 - i\Delta_1)\alpha_1^+ ) +
+	\mqty(\kappa\alpha_2 & 2\gamma_1n^{\text{th}}_1 \\
+	 2\gamma_1n^{\text{th}}_1 & \kappa\alpha_2^+)^{1/2}
+	\mqty(\eta_1(t) \\ \eta_1^+(t)),
 \end{equation}
+and 
+\begin{equation}\label{eq_lan_2}
+	\pdv{t}\mqty(\alpha_2 \\ \alpha_2^+) =
+	\mqty(\epsilon_2 -\frac{\kappa}{2}\alpha_1^2 - (\gamma_2 + i\Delta_2)\alpha_2 \\
+	\epsilon_2^* -\frac{\kappa}{2}\alpha_1^{+\;2} - (\gamma_2 - i\Delta_2)\alpha_2^+ ) +
+	\mqty(0 & 2\gamma_2n^{\text{th}}_2 \\
+	 2\gamma_2n^{\text{th}}_2 & 0)^{1/2}
+	\mqty(\eta_2(t) \\ \eta_2^+(t)).
+\end{equation}
+Here, $\eta_d(t)$ and $\eta_d^+(t)$ are Gaussian random processes with the delta correlated relationship:
+\begin{equation}
+	\begin{aligned}
+		&\expval{\eta_d(t)} = \expval{\eta_d^+(t)} = 0, \\
+		&\expval{\eta_d(t)\eta_{d'}^+(t')} = \delta_{d,d'}\delta(t-t'),
+	\end{aligned}
+\end{equation}
+where $\delta_{d,d'}$ is the Kronecker delta function and $\delta(t)$ is the Dirac delta function. 
 
+\section*{Numerical Results}
 
+To address the system of equations provided in Eq.~\eqref{eq_lan_1} and Eq.~\eqref{eq_lan_2}, we have two options: numerical integration or, where applicable, employing a linearized fluctuation analysis around the classical steady state solutions \cite{olsen2013}. Having previously solved these equations for classical steady state solutions in the previous work \cite{drummond1980n}, we opt for the second option in this current study. This will provide an opportunity to easily describe and predict both classical and quantum fluctuations in this system around the steady states.
+A linearized fluctuation analysis can be executed by expressing the generalized P variables as the sum of a time-independent classical steady-state component and a time-dependent fluctuation variable, as described below:
+\begin{equation}
+	\alpha_d = \alpha_d^{\text{ss}} + \delta\alpha_d(t),
+\end{equation}
+where $\alpha_d^{\text{ss}}$ are the classical steady state solutions which can be found in Ref.~\cite{drummond1980n}. By substituting this back into the Eq.~\eqref{eq_lan_1} and Eq.~\eqref{eq_lan_2} we can identify new set of equations of motion for the fluctuation variables as follows
+\begin{equation}
+	\pdv{t}\delta\boldsymbol{\alpha} =
+	-A \delta\boldsymbol{\alpha} + B \boldsymbol{\eta}(t),
+\end{equation}
+where $A$ is the steady state drift matrix which can be identify as
+\begin{equation}
+	A = \mqty(
+		-\gamma_1 & \kappa\alpha_2^{\text{ss}} & \kappa \alpha_1^{\text{ss}\;*} & 0 \\
+		\kappa \alpha_2^{\text{ss}\;*} & -\gamma_1 & 0 & \kappa\alpha_1^{\text{ss}} \\
+		-\kappa\alpha_1^{\text{ss}} & 0 & -\gamma_2 & 0 \\
+		0 & -\kappa\alpha_1^{\text{ss}\;*} & 0 & -\gamma_2
+	),
+\end{equation}
+and $B$ is the matrix of the steady state coefficient for the fluctuations, as demonstrated by
+\begin{equation}
+	B = \mqty(
+		\kappa\alpha_2^{\text{ss}} & 2\gamma_1n^{\text{th}}_1 & 0 & 0 \\
+		2\gamma_1n^{\text{th}}_1 & \kappa\alpha_2^{\text{ss}} & 0 & 0 \\
+		0 & 0 & 0 & 2\gamma_2n^{\text{th}}_2 \\
+		0 & 0 & 2\gamma_2n^{\text{th}}_2 & 0
+	)^{1/2}.
+\end{equation}
+In this context, $\delta\boldsymbol{\alpha} = (\delta\alpha_1,\delta\alpha_1^+,\delta\alpha_2,\delta\alpha_2^+)^{\intercal}$, and $\boldsymbol{\eta}(t) = (\eta_1(t),\eta_1^+(t),\eta_2(t),\eta_2^+(t))^{\intercal}$ \cite{olsen2013}. As long as the solutions are steady we can find the steady state spectrum of the cavity using the following expression \cite{drummond1980n,olsen2013} 
+\begin{equation}\label{eq_spectrum}
+	S(\omega) = \frac{1}{2\pi} (A + i\omega I)^{-1}D(A^{\intercal} - i\omega I)^{-1},
+\end{equation}
+where $D = BB^{\intercal}$, $I$ is the identity matrix, and $S(\omega)$ denotes the spectrum matrix, where its elements can be identified as the Fourier transform of the correction function
+\begin{equation}
+	S_{dd'}(\omega) = \frac{1}{2\pi} 
+	\int_{-\infty}^{\infty} \exp(-i\omega \tau) \expval{\alpha_d(t)\alpha_{d'}(t+\tau)} \dd \tau.
+\end{equation}
+Since our primary focus is on quantum fluctuations, under this study we neglect thermal fluctuations in the system by setting $n^{\text{th}}_1 = n^{\text{th}}_2 = 0$. 
 
+\subsection*{Sub Harmonic Generation}
 
+First, using the Eq.\eqref{eq_spectrum} we can derive expression for the spectrum element $S_{12}(\omega) = \expval{\alpha_1(\omega)\alpha_1^+(\omega)}$ which is corresponds to the sub harmonic generation inside the cavity. substituting the $A$ and $B$ matrixes back into the Eq.~\eqref{eq_spectrum}, we can find a expression for the normalized spectrum $\tilde{S}_{12} = S_{12}/\gamma_2$ as follows
+\begin{equation}
+	\tilde{S}_{12}(\tilde{\omega}) = 
+	\frac{
+		\tilde{\alpha}_2^{\text{ss}\;2}(\tilde{\omega}^2 + 1)\left[\tilde{\alpha}_1^{\text{ss}\;2} + \tilde{\gamma}_1(\tilde{\omega}^2 + 1)\right]
+	}{\pi \left[\mathcal{R}^2(\tilde{\omega}) + \mathcal{I}^2(\tilde{\omega})\right]},
+\end{equation}
+where we used the normalized variable: 
+$\tilde{\alpha}_1^{\text{ss}} = \kappa{\alpha}_1^{\text{ss}}/\gamma_1$, 
+$\tilde{\alpha}_2^{\text{ss}} = \kappa{\alpha}_2^{\text{ss}}/\gamma_2$, 
+$\tilde{\gamma}_1 = \gamma_1/\gamma_2$, and 
+$\tilde{\omega} = \omega/\gamma_2$. 
+Furthermore, we introduced these functions for ease of notation
+\begin{equation}
+	\mathcal{R}(\tilde{\omega}) = 
+	(\tilde{\alpha}_1^{\text{ss}\;2} + \tilde{\gamma}_1 - \tilde{\omega}^2 ) -
+	\tilde{\omega}^2(\tilde{\gamma}_1 + 1)^2 -
+	\tilde{\alpha}_1^{\text{ss}\;2}(1 - \tilde{\omega}^2),
+\end{equation}
+and 
+\begin{equation}
+	\mathcal{I}(\tilde{\omega}) = 
+	2\tilde{\omega}
+	\left[
+	\tilde{\alpha}_2^{\text{ss}\;2} -
+	(\tilde{\gamma}_1 +1)(\tilde{\alpha}_1^{\text{ss}\;2} + \tilde{\gamma}_1 - \tilde{\omega}^2 )
+	\right].
+\end{equation}
+Since we consider the ub harmonic generation we can set $\epsilon_1 = 0$ and consider the spectrum under three different condition by changing the amplitude $\epsilon_2$ of the second light mode compared to the threshold $\epsilon_2^c = \gamma_1\gamma_2/\kappa$ for the second order phase transitions \cite{drummond1980n}. Figure \ref{fig_2} shows the spectrum of $\tilde{S}_{12}(\tilde{\omega})$ under the three conditions: $\epsilon_2$ is well below, just below and well above $\epsilon_2^c$. In this calculation we used the following classical steady state solutions as described in the previous literature \cite{drummond1980n,walls2008,mcneil1978}
+\begin{equation} 
+	\begin{aligned}
+	&{\alpha}_1^{\text{ss}} = 0 \quad \text{and} \quad 
+	{\alpha}_2^{\text{ss}} = \frac{\epsilon_2}{\gamma_2} \quad \text{when} \quad
+	\epsilon_2 < \epsilon_2^c, \\
+	&
+	{\alpha}_1^{\text{ss}} = \pm \left[ \frac{2}{\kappa}(\epsilon_2 - \epsilon_2^c) \right]^{1/2} \quad \text{and} \quad 
+	{\alpha}_2^{\text{ss}} = \frac{\gamma_1}{\kappa} \quad \text{when} \quad
+	\epsilon_2 > \epsilon_2^c.
+	\end{aligned}
+\end{equation}
+\begin{figure}[!t]
+	\centering
+	\subfigure{\includegraphics[width=0.6\textwidth]
+	  {./figures/fig_2.pdf}}
+	\subfigure{\includegraphics[width=0.18\textwidth]
+	  {./figures/fig_2_legend.pdf}}
+	\caption{Linearized spectrum $\tilde{S}_{12}(\tilde{\omega})$ for sub harmonic generation. Here, we assumed that $\gamma_1/\gamma_2 = 0.5$. Vertical scale ratios: 140:2:1.}
+	\label{fig_2}
+\end{figure}
 
+\subsection*{Second Harmonic Generation}
 
+In this subsection, we consider about the spectrum of the second harmonic generation $S_{34}(\omega) = \expval{\alpha_2(\omega)\alpha_2^+(\omega)}$.
+Following the same steps as the previous subsection, we can derive an expression for the normalized spectrum for second harmonic generation  $\tilde{S}_{34} = S_{12}/\gamma_2$ as follows
+\begin{equation}
+	\tilde{S}_{34}(\tilde{\omega}) = 
+	\frac{
+		\tilde{\alpha}_2^{\text{ss}\;2}\tilde{\alpha}_1^{\text{ss}\;2}
+		\left[\tilde{\alpha}_1^{\text{ss}\;2} + \tilde{\gamma}_1(\tilde{\omega}^2 + 1)\right]
+	}{\pi \left[\mathcal{R}^2(\tilde{\omega}) + \mathcal{I}^2(\tilde{\omega})\right]}.
+\end{equation}
+Here, we set $\epsilon_2 =0$ to focus only on the second harmonic generation, and under different values of $\epsilon_1$ we can analyze the behavior of the spectrum. Figure \ref{fig_3} shows the behavior of spectrum for the second harmonic generation under three different values of $\epsilon_1$. It is imporatant to state that we only consider $\epsilon_1$ values that are lower then the threshold value $\epsilon_1^c$ which can be identify as \cite{mcneil1978} 
+\begin{equation}
+	\epsilon_1^c = \frac{\gamma_2 + 2\gamma_1}{\kappa}
+	\left[ 2\gamma_2(\gamma_1 + \gamma_2)\right]^{1/2}.
+\end{equation}
+Following previous studies \cite{drummond1980n,mcneil1978}, we used following equation to find the classic stead state solution for ${\alpha}_2^{\text{ss}}$ variable for different levels of $\epsilon_1$ values 
+\begin{equation}
+	-\gamma_2(\kappa{\alpha}_2^{\text{ss}})^3 +
+	4\gamma_1\gamma_2(\kappa{\alpha}_2^{\text{ss}})^2 -
+	2\gamma_1^2\gamma_2(\kappa{\alpha}_2^{\text{ss}}) =
+	|\kappa\epsilon_1|^2.
+\end{equation}
+\begin{figure}[!t]
+	\centering
+	\subfigure{\includegraphics[width=0.64\textwidth]
+	  {./figures/fig_3.pdf}}
+	\subfigure{\includegraphics[width=0.18\textwidth]
+	  {./figures/fig_3_legend.pdf}}
+	\caption{Linearized spectrum $\tilde{S}_{34}(\tilde{\omega})$ for sub harmonic generation. Here, we assumed that $\gamma_1/\gamma_2 = 0.5$. Vertical scale ratios: 1:15:5000.}
+	\label{fig_3}
+\end{figure}
 
+\section*{Discussion}
 
+A comprehensive quantum statistical analysis has been conducted in this study to examine the phenomenon of coherently driven sub/second harmonic generation within an optical cavity. This research described the intricate dynamics of quantum fluctuations, particularly focusing on their behavior in proximity to the instability states as predicted by classical theory.
 
+One significant observation is the spectrum of the subharmonic light, which undergoes a critical narrowing effect as it approaches the threshold for the second-order phase transition. In cavity nonlinear optics, second-order phase transitions may arise in systems that show spontaneous symmetry breaking, wherein the system transfer from one state to another with changes in a parameter. In this investigation, we manipulated the intensity of the driving field as this parameter. Understanding second-order phase transitions in cavity non-linear optics can provide insights into the complex behavior of light-matter interactions in confined geometries and can have implications for various applications, including the development of novel optical devices and technologies.
+Furthermore, as the driving field intensity increases, the subharmonic spectrum separates into two distinct peaks, signifying a complex interplay of non-linear effects within the resonator. This phenomenon manifests as oscillations in the correlation functions when the eigenvalues of the linearized equations of motion acquire non-zero imaginary parts.
 
+Moreover, the investigation showed a fascinating behavior in the spectrum of the second harmonic generation. Below the threshold for hard mode oscillations, the second harmonic spectrum similarly splits into two peaks, suggesting the emergence of distinct resonance modes within the system. In addition, the width of these peaks diminishes as the threshold is approached, indicating a progressive stabilization of the system towards a more coherent state. Understanding these dynamics could pave the way for novel applications in fields ranging from biomedical imaging to quantum computing.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+This comprehensive theoretical analysis provided valuable insights into the complex dynamics of coherently driven sub/second harmonic generation within optical resonators. It illuminated the fundamental physics behind the emergence of intricate spectral characteristics and phase transitions in such systems.
 
 
 \bibliography{manuscript}
-
 \end{document}
